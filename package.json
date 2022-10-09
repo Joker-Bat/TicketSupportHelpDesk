@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./Backend/index.js",
-    "dev": "nodemon ./Backend/index.js"
+    "server": "nodemon ./Backend/index.js",
+    "client": "npm start --prefix ./frontend",
+    "dev":"concurrently \"npm run server\" \"npm run client\""
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["redux", "react", "node", "express", "mongodb"],
+  "author": "Ayush Pandit",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
