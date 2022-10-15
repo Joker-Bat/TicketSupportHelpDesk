@@ -1,8 +1,32 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { FaSignInAlt } from 'react-icons/fa'
+import { useSelector, useDispatch } from 'react-redux'
+import { login } from '../features/auth/authSlice'
 
 function Login() {
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  })
+  const { email, password } = formData
+  const dispatch = useDispatch()
+  const { user, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
+  const onChange = (e) => {
+    console.log(e.target.value)
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }))
+  }
+  const onSubmit = (e) => {
+    e.preventDefault()
+    console.log('submit')
+    const userData = {
+      email,
+      password,
+    }
+    dispatch(login(userData))
+  }
   return (
     <>
       <LoginContainer>
@@ -14,9 +38,26 @@ function Login() {
           <LoginDescription>
             Login to your account to access your dashboard
           </LoginDescription>
-          <LoginInput type='text' placeholder='Username' />
-          <LoginInput type='password' placeholder='Password' />
-          <LoginButton>Login</LoginButton>
+          <LoginInput
+            type='email'
+            name='email'
+            id='email'
+            value={email}
+            onChange={onChange}
+            placeholder='Email'
+            required
+          />
+          <LoginInput
+            type='password'
+            name='password'
+            id='password'
+            value={password}
+            onChange={onChange}
+            placeholder='Password'
+            required
+          />
+
+          <LoginButton onSubmit={onSubmit}>Login</LoginButton>
         </LoginForm>
       </LoginContainer>
     </>
