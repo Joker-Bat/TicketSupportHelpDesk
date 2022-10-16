@@ -30,7 +30,7 @@ function Login() {
   return (
     <>
       <LoginContainer>
-        <LoginForm>
+      <LoginForm onSubmit={onSubmit}>
           <LoginTitle>
             <FaSignInAlt />
             Login
@@ -57,7 +57,7 @@ function Login() {
             required
           />
 
-          <LoginButton onSubmit={onSubmit}>Login</LoginButton>
+          <LoginButton>Login</LoginButton>
         </LoginForm>
       </LoginContainer>
     </>
